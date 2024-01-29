@@ -52,7 +52,7 @@ class _DashboardWebState extends ConsumerState<DashboardWeb> {
                       child: Text(
                         dashboardWatch.listPageString[index],
                         style: TextStyles.medium
-                            .copyWith(fontSize: 16, color: AppColors.black),
+                            .copyWith(fontSize: 16, color: AppColors.black,fontFamily: TextStyles.poppinsFontFamily),
                       ).paddingAll(20.w),
                     ))
           ],
