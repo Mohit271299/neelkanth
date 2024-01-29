@@ -123,3 +123,4 @@ app.*.symbols
 /lib/generated/
 /.idea/
 lib/framework/dependency_injection/inject.config.dart
+/lib/routing/navigation_stack_item.freezed.dart

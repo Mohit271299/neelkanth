@@ -1,0 +1,11 @@
+<svg id="star" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fec34d"/>
+      <stop offset="0.263" stop-color="#f88c83"/>
+      <stop offset="1" stop-color="#f048c6"/>
+    </linearGradient>
+  </defs>
+  <path id="Vector" d="M6.754.824,7.767,2.85a1.251,1.251,0,0,0,.818.6l1.837.3c1.175.2,1.451,1.047.6,1.887L9.6,7.074a1.249,1.249,0,0,0-.3,1.042l.409,1.767c.322,1.4-.42,1.939-1.658,1.208L6.328,10.072a1.246,1.246,0,0,0-1.14,0L3.466,11.09c-1.232.731-1.981.184-1.658-1.208l.409-1.767a1.249,1.249,0,0,0-.3-1.042L.489,5.647c-.841-.84-.57-1.692.6-1.887l1.837-.3a1.254,1.254,0,0,0,.812-.6L4.756.824C5.308-.275,6.207-.275,6.754.824Z" transform="translate(1.243 1.29)" fill="url(#linear-gradient)"/>
+  <path id="Vector-2" data-name="Vector" d="M0,0H14V14H0Z" opacity="0" fill="url(#linear-gradient)"/>
+</svg>
