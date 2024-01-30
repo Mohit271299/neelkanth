@@ -41,9 +41,11 @@ class _DashboardMobileState extends ConsumerState<DashboardMobile> {
       drawer: CommonDrawer(),
       appBar: CommonAppBar(
         isDrawerEnable: true,
-        isLeadingEnable: true,
+        // isLeadingEnable: true,
         backgroundColor: AppColors.greyEEEEEE,
         leftImage: AppAssets.bacKLogoSvg,
+
+        title: dashboardWatch.initialPage.pageName,
         // centerWidget: Row(
         //   mainAxisAlignment: MainAxisAlignment.start,
         //   children: [
@@ -75,7 +77,7 @@ class _DashboardMobileState extends ConsumerState<DashboardMobile> {
               color: AppColors.black,
               size: 25.sp,
             ),
-          ).paddingOnly(right: 20.w),
+          ).paddingOnly(right: 20.w,),
         ],
       ),
       body: _bodyWidget(),
@@ -86,7 +88,7 @@ class _DashboardMobileState extends ConsumerState<DashboardMobile> {
   Widget _bodyWidget() {
     final dashboardWatch = ref.watch(dashboardController);
     return Container(
-      child: dashboardWatch.listPages[dashboardWatch.initialPage],
+      child: dashboardWatch.listPages[dashboardWatch.initialPage.index].page,
     );
   }
 }

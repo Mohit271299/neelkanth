@@ -8,9 +8,8 @@ import 'package:neelkanth/ui/product/products.dart';
 import 'package:neelkanth/ui/utils/theme/app_strings.dart';
 import '../../dependency_injection/inject.dart';
 
-
 final dashboardController = ChangeNotifierProvider(
-      (ref) => getIt<DashboardController>(),
+  (ref) => getIt<DashboardController>(),
 );
 
 @injectable
@@ -33,25 +32,28 @@ class DashboardController extends ChangeNotifier {
     notifyListeners();
   }
 
-  int initialPage = 0;
+  // int initialPage = 0;
 
-  List<String> listPageString= [
-    AppStrings.keyHome,
-    AppStrings.keyProduct,
-    AppStrings.keyBrand,
-    AppStrings.keyContactUs,
+  WidgetString initialPage = WidgetString(pageName: AppStrings.keyHome, page: const Home(),index: 0);
+
+  List<WidgetString> listPages = [
+    WidgetString(pageName: AppStrings.keyHome, page: const Home(),index: 0),
+    WidgetString(pageName: AppStrings.keyProduct, page: const Products(),index: 1),
+    WidgetString(pageName: AppStrings.keyBrand, page: const Brand(),index: 2),
+    WidgetString(pageName: AppStrings.keyContactUs, page: const ContactUs(),index: 3),
   ];
 
-  List<Widget> listPages= [
-    const Home(),
-    const Products(),
-    const Brand(),
-    const ContactUs(),
-  ];
-
-  void updatePageIndex(int value){
+  void updatePageIndex(WidgetString value) {
     initialPage = value;
     print(initialPage);
     notifyListeners();
   }
+}
+
+class WidgetString {
+  String pageName;
+  Widget page;
+  int index;
+
+  WidgetString({required this.pageName, required this.page,required this.index});
 }

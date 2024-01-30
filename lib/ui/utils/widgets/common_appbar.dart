@@ -42,7 +42,7 @@ class CommonAppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
-      centerTitle: true,
+      centerTitle: false,
       leading: (isLeadingEnable)
           ? ((isDrawerEnable)
               ? Consumer(builder: (context, ref, child) {
@@ -96,8 +96,10 @@ class CommonAppBar extends ConsumerWidget implements PreferredSizeWidget {
           Text(title,
               textAlign: TextAlign.center,
               style: titleStyle ??
-                  TextStyles.medium
-                      .copyWith(fontSize: 16.sp, color: AppColors.black)),
+                  TextStyles.medium.copyWith(
+                      fontSize: 16,
+                      color: AppColors.black,
+                      fontFamily: TextStyles.poppinsFontFamily)),
     );
   }
 

@@ -59,10 +59,10 @@ class _HomeWebState extends ConsumerState<HomeWeb> {
                       AppAssets.homeBg,
                       height: 712.h,
                       width: MediaQuery.sizeOf(context).width,
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.fill,
                     ),
                     Container(
-                      color: AppColors.black.withOpacity(0.4),
+                      color: AppColors.black.withOpacity(0.5),
                       height: 712.h,
                       width: MediaQuery.sizeOf(context).width,
                     )

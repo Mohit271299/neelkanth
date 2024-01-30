@@ -6,10 +6,7 @@ import 'package:neelkanth/framework/utility/extension/extension.dart';
 import 'package:neelkanth/ui/utils/theme/theme.dart';
 import 'package:neelkanth/ui/utils/widgets/common_svg.dart';
 
-class CommonDrawer extends ConsumerWidget{
-
-
-
+class CommonDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardWatch = ref.watch(dashboardController);
@@ -19,25 +16,27 @@ class CommonDrawer extends ConsumerWidget{
           CommonSVG(
             strIcon: AppAssets.bacKLogoSvg,
             boxFit: BoxFit.scaleDown,
-            height: 200.h,width: 100.w,
+            height: 200.h,
+            width: 100.w,
           ).paddingOnly(left: 20.h),
-
           ...List.generate(
-              dashboardWatch.listPageString.length,
-                  (index) => InkWell(
-                onTap: () {
-                  dashboardWatch.updatePageIndex(index);
-                },
-                child: Text(
-                  dashboardWatch.listPageString[index],
-                  style: TextStyles.medium
-                      .copyWith(fontSize: 16, color: AppColors.black),
-                ).paddingAll(20.w),
-              ))
-
+              dashboardWatch.listPages.length,
+              (index) => InkWell(
+                    onTap: () {
+                      dashboardWatch.updatePageIndex(WidgetString(
+                          pageName: dashboardWatch.listPages[index].pageName,
+                          page: dashboardWatch.listPages[index].page,
+                          index: index));
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      dashboardWatch.listPages[index].pageName,
+                      style: TextStyles.medium
+                          .copyWith(fontSize: 16, color: AppColors.black),
+                    ).paddingAll(20.w),
+                  ))
         ],
       ),
     );
   }
-
 }

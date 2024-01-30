@@ -44,15 +44,20 @@ class _DashboardWebState extends ConsumerState<DashboardWeb> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ...List.generate(
-                dashboardWatch.listPageString.length,
+                dashboardWatch.listPages.length,
                 (index) => InkWell(
                       onTap: () {
-                        dashboardWatch.updatePageIndex(index);
+                        dashboardWatch.updatePageIndex(WidgetString(
+                            pageName: dashboardWatch.listPages[index].pageName,
+                            page: dashboardWatch.listPages[index].page,
+                            index: index));
                       },
                       child: Text(
-                        dashboardWatch.listPageString[index],
-                        style: TextStyles.medium
-                            .copyWith(fontSize: 16, color: AppColors.black,fontFamily: TextStyles.poppinsFontFamily),
+                        dashboardWatch.listPages[index].pageName,
+                        style: TextStyles.medium.copyWith(
+                            fontSize: 16,
+                            color: AppColors.black,
+                            fontFamily: TextStyles.poppinsFontFamily),
                       ).paddingAll(20.w),
                     ))
           ],
@@ -82,7 +87,7 @@ class _DashboardWebState extends ConsumerState<DashboardWeb> {
   Widget _bodyWidget() {
     final dashboardWatch = ref.watch(dashboardController);
     return Container(
-      child: dashboardWatch.listPages[dashboardWatch.initialPage],
+      child: dashboardWatch.listPages[dashboardWatch.initialPage.index].page,
     );
   }
 }
