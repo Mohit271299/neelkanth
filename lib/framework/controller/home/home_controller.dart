@@ -39,6 +39,17 @@ class HomeController extends ChangeNotifier {
     ServicesList(title: AppStrings.services4Title, subtitle: AppStrings.service4Subtitle, assetString: AppAssets.bacKLogoSvg),
   ];
 
+  void updateHover (bool value,int index){
+    socialMedia[index].hovering = value;
+    notifyListeners();
+  }
+
+  List<SocialMedia> socialMedia = [
+    SocialMedia(className: "Facebook", hovering: false),
+    SocialMedia(className: "Instagram", hovering: false),
+    SocialMedia(className: "Twitter", hovering: false),
+    SocialMedia(className: "LinkedIn", hovering: false),
+  ];
 
 }
 
@@ -48,5 +59,12 @@ class ServicesList{
   String subtitle;
 
   ServicesList({required this.title,required this.subtitle,required this.assetString});
+
+}
+
+class SocialMedia{
+  String className;
+  bool hovering;
+  SocialMedia({required this.className,required this.hovering});
 
 }

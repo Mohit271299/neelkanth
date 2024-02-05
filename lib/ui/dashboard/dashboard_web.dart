@@ -38,7 +38,7 @@ class _DashboardWebState extends ConsumerState<DashboardWeb> {
     return Scaffold(
       appBar: CommonAppBar(
         isLeadingEnable: true,
-        backgroundColor: AppColors.greyEEEEEE,
+        backgroundColor: AppColors.blueEBF0F3,
         leftImage: AppAssets.bacKLogoSvg,
         centerWidget: Row(
           mainAxisAlignment: MainAxisAlignment.start,

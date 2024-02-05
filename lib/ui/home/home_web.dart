@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:hive/hive.dart';
+import 'package:neelkanth/framework/controller/dashboard/dashboard_controller.dart';
 import 'package:neelkanth/framework/controller/home/home_controller.dart';
 import 'package:neelkanth/framework/utility/extension/extension.dart';
 import 'package:neelkanth/ui/utils/theme/theme.dart';
@@ -104,6 +106,9 @@ class _HomeWebState extends ConsumerState<HomeWeb> {
             ///product introduction panel
             _productIntroductionPanel(homeWatch),
 
+            ///product details panel
+            _productDetailsPanel(homeWatch),
+
             _contactUsPanel()
           ],
         ),
@@ -196,6 +201,7 @@ class _HomeWebState extends ConsumerState<HomeWeb> {
   }
 
   _productIntroductionPanel(HomeController homeWatch) {
+    final dashboardWatch = ref.watch(dashboardController);
     return Container(
       color: AppColors.blueEBF0F3,
       height: 612.h,
@@ -218,6 +224,12 @@ class _HomeWebState extends ConsumerState<HomeWeb> {
                 ).paddingOnly(bottom: 20.h),
                 CommonButton(
                   buttonText: AppStrings.productIntroductionSlogan2,
+                  onTap: (){
+                    dashboardWatch.updatePageIndex(WidgetString(
+                        pageName: dashboardWatch.listPages[1].pageName,
+                        page: dashboardWatch.listPages[1].page,
+                        index: 1));
+                  },
                   backgroundColor: AppColors.black,
                   buttonTextStyle: TextStyles.medium.copyWith(
                       fontFamily: TextStyles.secondaryFontFamily,
@@ -233,9 +245,173 @@ class _HomeWebState extends ConsumerState<HomeWeb> {
     );
   }
 
-  _contactUsPanel() {
+  _productDetailsPanel(HomeController homeWatch) {
     return Container(
-      height: 80.h,
+      color: AppColors.white,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 80.h,
+          ),
+          Container(
+            width: MediaQuery.sizeOf(context).width / 1.5,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  AppStrings.productCatalogue,
+                  textAlign: TextAlign.center,
+                  style: TextStyles.semiBold.copyWith(
+                      fontSize: 26.sp,
+                      color: AppColors.black,
+                      fontWeight: TextStyles.fwRegular,
+                      fontFamily: TextStyles.groverFontFamily),
+                ).paddingOnly(right: 30.w),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: AppColors.grey9F9F9F, width: 1.0.sp),
+                      borderRadius: BorderRadius.circular(100.r)),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.share_rounded,
+                        color: AppColors.grey9F9F9F,
+                      ).paddingOnly(right: 10.w),
+                      Text(
+                        'Share',
+                        textAlign: TextAlign.center,
+                        style: TextStyles.semiBold.copyWith(
+                            fontSize: 16.sp,
+                            color: AppColors.black,
+                            fontWeight: TextStyles.fwRegular,
+                            fontFamily: TextStyles.poppinsFontFamily),
+                      ),
+                    ],
+                  ).paddingSymmetric(horizontal: 8.0, vertical: 5.0),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          Divider().paddingSymmetric(horizontal: 200.w),
+          SizedBox(
+            height: 20.h,
+          ),
+          Container(
+            width: MediaQuery.sizeOf(context).width / 1.3,
+            child: Text(
+              AppStrings.productCatalogueSlogan,
+              textAlign: TextAlign.center,
+              style: TextStyles.semiBold.copyWith(
+                  fontSize: 18.sp,
+                  color: AppColors.black616161,
+                  fontWeight: TextStyles.fwRegular,
+                  fontFamily: TextStyles.poppinsFontFamily),
+            ),
+          ),
+          SizedBox(
+            height: 80.h,
+          ),
+        ],
+      ),
+    );
+  }
+
+  _contactUsPanel() {
+    final homeWatch = ref.watch(homeController);
+    return Container(
+      color: AppColors.blueEBF0F3,
+      height: 312.h,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.start,
+            children: [
+              ...List.generate(
+                  10,
+                  (index) => Container(
+                        child: Text(
+                          AppStrings.keyBrand,
+                          textAlign: TextAlign.center,
+                          style: TextStyles.semiBold.copyWith(
+                              fontSize: 18.sp,
+                              color: AppColors.black616161,
+                              fontWeight: TextStyles.fwRegular,
+                              fontFamily: TextStyles.poppinsFontFamily),
+                        ).paddingAll(20),
+                      ))
+            ],
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CommonSVG(
+                  strIcon: AppAssets.bacKLogoSvg,
+                  height: 50.h,
+                  width: 50.w,
+                ).paddingOnly(bottom: 30.h),
+                SizedBox(
+                  width: 50.w,
+                ),
+                ...List.generate(
+                    homeWatch.socialMedia.length,
+                    (index) => MouseRegion(
+                          onEnter: (event) {
+                            print("hovering Enter");
+                            homeWatch.updateHover(true, index);
+                          },
+                          onExit: (event) {
+                            print("hovering");
+                            homeWatch.updateHover(false, index);
+                          },
+                          onHover: (hovering) {
+                            // print("hovering");
+                            // homeWatch.updateHover(hovering);
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.ease,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5.0.h, horizontal: 8.0.w),
+                            decoration: BoxDecoration(
+                              color: homeWatch.socialMedia[index].hovering
+                                  ? AppColors.black
+                                  : Colors.transparent,
+                              border: Border.all(
+                                  color: homeWatch.socialMedia[index].hovering
+                                      ? AppColors.white
+                                      : Colors.transparent,
+                                  width: 1),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              homeWatch.socialMedia[index].className,
+                              textAlign: TextAlign.center,
+                              style: TextStyles.semiBold.copyWith(
+                                  fontSize: 18.sp,
+                                  color: homeWatch.socialMedia[index].hovering
+                                      ? AppColors.white
+                                      : AppColors.black616161,
+                                  fontWeight: TextStyles.fwRegular,
+                                  fontFamily: TextStyles.secondaryFontFamily),
+                            ).paddingSymmetric(horizontal: 10),
+                          ).paddingOnly(right: 20.w),
+                        )),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 30.h,
+          )
+        ],
+      ).paddingSymmetric(horizontal: 20.w),
     );
   }
 }
